@@ -1,0 +1,10 @@
+# Import roles and permissions to the target GCP project
+gcloud projects set-iam-policy YOUR_TARGET_PROJECT_ID iam_export.json
+
+# Verify the imported IAM policy
+gcloud projects get-iam-policy YOUR_TARGET_PROJECT_ID --flatten="bindings[].members" --format="json" > imported_permissions.json
+
+
+Replace YOUR_TARGET_PROJECT_ID with the actual ID of your target GCP project.
+
+Note: Make sure you have the necessary permissions to manage IAM policies in both the source and target GCP projects. Additionally, ensure that you have the gcloud command-line tool installed and authenticated.
