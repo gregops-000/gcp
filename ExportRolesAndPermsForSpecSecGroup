@@ -1,0 +1,12 @@
+Export Roles and Permissions for a Specific Security Group:
+
+# Export roles and permissions associated with SYSTEM_ADMINS@domain.com
+gcloud projects get-iam-policy YOUR_SOURCE_PROJECT_ID \
+  --flatten="bindings[].members" \
+  --format="json" | jq 'select(.bindings[].members[] | contains("SYSTEM_ADMINS@domain.com"))' > iam_export.json
+
+# Save the exported IAM policy to a text file
+cat iam_export.json > exported_permissions.txt
+
+
+# This script uses jq to filter the IAM policy to include only those entries that have members containing "SYSTEM_ADMINS@domain.com". Make sure to replace YOUR_SOURCE_PROJECT_ID with the actual ID of your source GCP project.
